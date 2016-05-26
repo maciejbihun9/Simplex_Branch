@@ -2,9 +2,11 @@ package view;
 
 
 import model.Limit;
-import model.SimplexTable;
+import model.OvalComponent;
 
 import javax.swing.*;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -21,8 +23,6 @@ public class projectGui  {
 
     //Gui elements
     private JPanel main_panel;
-    private JPanel input_panel;
-    private JLabel amount_of_variable_label;
     private JTextField amount_of_variables_field;
     private JButton amount_approve_btt;
     private JTable function_table;
@@ -30,14 +30,16 @@ public class projectGui  {
     private JButton addLimitBtt;
     private JButton removeLimitBtt;
     private JButton approve_function_btt;
-    private JPanel properties_panel;
-    private JLabel variablesTableLabel;
-    private JPanel panel1;
-    private JLabel limitListLabel;
     private JButton approve_limits;
     private JButton countButton;
+    private JPanel input_panel;
     private JPanel resultsPanel;
-
+    private JPanel properties_panel;
+    private JPanel panel1;
+    private JLabel limitListLabel;
+    private JLabel variablesTableLabel;
+    private JLabel amount_of_variable_label;
+    private JPanel visualPanel;
 
     //Local Variables
     private List<Integer> functionParameters;
@@ -48,6 +50,10 @@ public class projectGui  {
     private Table functionTable;
     private int selectedRow;
 
+    private static JFrame frame;
+    private static Rameczka rameczka;
+
+
 
     public projectGui(){
 
@@ -56,6 +62,7 @@ public class projectGui  {
             public void actionPerformed(ActionEvent e) {
                 approve_function_btt.setEnabled(true);
                 setFunctionVariables();
+
             }
         });
 
@@ -157,18 +164,24 @@ public class projectGui  {
         countButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                displayResultsInResultPanel();
+                //Main main = new Main(visualPanel);
+                startShaping();
             }
         });
     }
 
-    private void displayResultsInResultPanel(){
+
+    /*private void displayResultsInResultPanel(){
         //Display result of the calculations in labels
         JLabel label = new JLabel("maciej");
 
         //Wprowadzanie danych do tablicy simplex.
-        SimplexTable simplexTable = SimplexTable.getInstance();
+        SimplexMethod simplexTable = new SimplexMethod(functionParameters, limitsList);
         simplexTable.setSimTab(functionParameters, limitsList);
+
+        BranchTree branchTree = BranchTree.getInstance();
+        branchTree.initizlizeTree(functionParameters, limitsList);
+        branchTree.setOptimalResult(simplexTable.getSimplexResults());
 
         //Repaint layout to display new components.
         resultsPanel.add(label);
@@ -177,7 +190,7 @@ public class projectGui  {
 
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
 
-    }
+    }*/
 
     private void addLimitToList(){
         if(!removeLimitBtt.isEnabled()){
@@ -225,14 +238,18 @@ public class projectGui  {
             executor.execute(r);
     }
 
-
-    public void createUIComponents(){
-
+    public void startShaping(){
+        rameczka.startShaping();
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("App");
-        frame.setContentPane(new projectGui().main_panel);
+        projectGui gui = new projectGui();
+        frame = new JFrame("App");
+        frame.setContentPane(gui.main_panel);
+
+        rameczka = new Rameczka();
+        frame.add(rameczka.view);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

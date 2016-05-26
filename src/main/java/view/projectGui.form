@@ -85,7 +85,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="5fa28" binding="properties_panel" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="20" vgap="20">
+      <grid id="5fa28" binding="properties_panel" layout-manager="GridLayoutManager" row-count="9" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="20" vgap="20">
         <margin top="32" left="32" bottom="32" right="32"/>
         <constraints/>
         <properties/>
@@ -171,7 +171,9 @@
             <constraints>
               <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <enabled value="true"/>
+            </properties>
             <border type="none"/>
             <children/>
           </grid>
@@ -191,7 +193,21 @@
               <text value="Created by: Maciej Bihun, Magda Kowalska"/>
             </properties>
           </component>
+          <component id="8fd2b" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Label"/>
+            </properties>
+          </component>
         </children>
+      </grid>
+      <grid id="50ad7" binding="visualPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints/>
+        <properties/>
+        <border type="none"/>
+        <children/>
       </grid>
     </children>
   </grid>
